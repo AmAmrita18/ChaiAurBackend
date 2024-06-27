@@ -10,6 +10,15 @@ dotenv.config({
 
 connectDB()
 
+//hmara database asyn fun hai aur asynchronous method jab bhi complete hota hai to ek promise return karta hai
+.then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+        console.log(`Server is running at port: ${process.env.PORT}`);
+    })
+})
+.catch((err) => {
+    console.log("MongoDB connection!!!", err);
+})
 
 
 /*
