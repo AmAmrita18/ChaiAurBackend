@@ -16,14 +16,24 @@ app.use(cors({
 app.use(express.json({limit: "16kb"}))
 
 //yeh url ko encode karta hai taaki special character k wajah se koi issue na aaye issue 
-app.use(urlencoded({extended: true,
+app.use(express.urlencoded({extended: true,
     limit:"16kb"
 }))
+
+
+
+//jab hm files ya folder store karna chahte hai to hm static use karte h--> yaha asset ka naam public h...
+app.use(express.static("public"))
 
 //cookie parser ka kaam h server se cookies access karna -->basically CRUD operation karna
 app.use(cookieParser())
 
-//jab hm files ya folder store karna chahte hai to hm static use karte h--> yaha asset ka naam public h...
-app.use(express.static("public"))
+//routes import
+import userRouter from './routes/user.routes.js'
+
+//routes declaration
+app.use("/api/v1/users", userRouter)
+// http://localhost:8000/api/v1/users/register
+
 export { app }
 
